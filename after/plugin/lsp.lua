@@ -8,7 +8,7 @@ lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-  
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 end)
 
 require('mason').setup({})
@@ -31,7 +31,7 @@ lsp_zero.set_sign_icons({
 })
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   severity_sort = true,
   float = {
     style = 'minimal',
@@ -71,7 +71,7 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({select = false}),
 
     -- toggle completion menu
-    ['<C-e>'] = cmp_action.toggle_completion(),
+    ['<C-Space>'] = cmp_action.toggle_completion(),
 
     -- tab complete
     ['<Tab>'] = cmp_action.tab_complete(),
