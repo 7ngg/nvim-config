@@ -17,15 +17,14 @@ return require('packer').startup(function(use)
         'rose-pine/neovim',
         as = 'rose-pine',
         config = function()
+            require('rose-pine').setup({ variant = 'moon' })
             vim.cmd('colorscheme rose-pine')
         end
     })
 
     use({
         'nvim-treesitter/nvim-treesitter',
-        run = function()
-            require('nvim-treesitter.install').update({ with_sync = true })
-        end
+        run = ':TSUpdate'
     })
 
     use('nvim-treesitter/playground')
@@ -52,6 +51,16 @@ return require('packer').startup(function(use)
             {'L3MON4D3/LuaSnip'},
             {'rafamadriz/friendly-snippets'},
         }
+    }
+
+    use {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
     }
 
     use {
