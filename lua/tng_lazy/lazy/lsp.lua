@@ -71,11 +71,10 @@ return {
                 documentation = cmp.config.window.bordered(),
             },
             sources = {
-                {name = 'luasnip'},
                 {name = 'nvim_lsp'},
-                {name = 'buffer'},
-                {name = 'path'},
-                {name = 'nvim_lua'},
+                {name = 'luasnip'},
+            }, {
+                {name = 'buffer'}
             },
             mapping = cmp.mapping.preset.insert({
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
