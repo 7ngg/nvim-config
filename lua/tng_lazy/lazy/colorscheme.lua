@@ -10,9 +10,20 @@ end
 return {
     {
         "Mofiqul/vscode.nvim",
+    },
+    {
+        "sainnhe/sonokai",
         config = function ()
-            vim.cmd.colorscheme("vscode")
---            ColorMyPencils()
+            vim.g.sonokai_style = "shusia"
         end
     },
+    {
+        "navarasu/onedark.nvim",
+        config = function()
+            require("onedark").setup {
+                style = "warmer"
+            }
+            require("onedark").load()
+        end
+    }
 }
