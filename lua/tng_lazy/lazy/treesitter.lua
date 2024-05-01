@@ -3,11 +3,8 @@ return ({{
     build = ":TSUpdate",
 
     config = function()
-        require('nvim-treesitter.install').prefer_git = false
-        --require('nvim-treesitter.install').compilers = { "clang" }
-
         require('nvim-treesitter.configs').setup({
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+            ensure_installed = { "c", "vimdoc", "lua" },
             sync_install = false,
             auto_install = true,
             indent = {
