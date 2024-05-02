@@ -34,3 +34,6 @@ vim.keymap.set("n", "<leader>sp", function ()
         print(string.format("Error compiling %s", filename))
     end
 end)
+
+-- Buffer format
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
