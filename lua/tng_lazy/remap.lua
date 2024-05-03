@@ -26,8 +26,9 @@ vim.keymap.set("n", "<leader>sp", function ()
     local new_filename = filename:gsub("%.scss$", ".min.css")
     local command = string.format("sass --no-source-map %s %s --style compressed", filename, new_filename)
 
-    local ok, err = os.execute(command)
+    local ok = os.execute(command)
 
+    -- ToDo: 
     if ok then
         print(string.format("Compiled into %s", new_filename))
     else
