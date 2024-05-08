@@ -39,7 +39,7 @@ return {
                         }
                     }
                 end,
-            }
+            },
         })
 
         vim.diagnostic.config({
