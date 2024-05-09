@@ -28,8 +28,7 @@ vim.keymap.set("n", "<leader>sp", function ()
 
     local ok = os.execute(command)
 
-    -- ToDo: 
-    if ok then
+    if ok == 0 then
         print(string.format("Compiled into %s", new_filename))
     else
         print(string.format("Error compiling %s", filename))
