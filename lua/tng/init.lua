@@ -1,14 +1,14 @@
-require("tng_lazy.remap")
-require("tng_lazy.set")
-require("tng_lazy.lazy_init")
+require("tng.remap")
+require("tng.set")
+require("tng.lazy_init")
 
 local augroup = vim.api.nvim_create_augroup
-local tngLazyGroup = augroup('tng_lazy', {})
+local tngGroup = augroup('tng', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd('LspAttach', {
-    group = tngLazyGroup,
+    group = tngGroup,
     callback = function(e)
         local opts = { buffer = e.buf }
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)

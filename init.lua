@@ -1,1 +1,1 @@
-require("tng_lazy")
+require("tng")
