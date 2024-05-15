@@ -7,6 +7,8 @@ local tngGroup = augroup('tng', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 
+vim.cmd('filetype on')
+
 autocmd('LspAttach', {
     group = tngGroup,
     callback = function(e)
@@ -17,6 +19,13 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     end
+})
+
+autocmd('TextYankPost', {
+  group = tngGroup,
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 --vim.g.netrw_browse_split = 0
