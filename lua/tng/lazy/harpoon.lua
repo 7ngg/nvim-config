@@ -7,9 +7,10 @@ return {
         vim.keymap.set("n", "<leader>a", mark.add_file)
         vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
-        --vim.keymap.set("n", "<C>1", function() ui.nav_file(1) end)
-        --vim.keymap.set("n", "<C>2", function() ui.nav_file(2) end)
-        --vim.keymap.set("n", "<C>3", function() ui.nav_file(3) end)
-        --vim.keymap.set("n", "<C>4", function() ui.nav_file(4) end)
+        for _, index in ipairs { 1, 2, 3, 4, 5 } do
+            vim.keymap.set("n", string.format("<space>%d", index), function()
+                ui.nav_file(index)
+            end)
+        end
     end
 }
