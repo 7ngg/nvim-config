@@ -1,24 +1,17 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
+        { "folke/neodev.nvim", opts = {} },
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-        "rafamadriz/friendly-snippets"
     },
     config = function()
-        local cmp_lsp = require("cmp_nvim_lsp")
+        require("neodev").setup({})
+
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
+            require("cmp_nvim_lsp").default_capabilities())
 
         local _border = "rounded"
 
@@ -75,7 +68,7 @@ return {
                 prefix = '',
             },
         })
-
+        --[[
         require('luasnip.loaders.from_vscode').lazy_load()
         vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
         local cmp = require('cmp')
@@ -86,7 +79,7 @@ return {
             },
             snippet = {
                 expand = function(args)
-                    require('luasnip').lsp_expand(args.body)
+                    vim.snippet.expand(args.body)
                 end
             },
             window = {
@@ -94,10 +87,8 @@ return {
             },
             sources = {
                 { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-            },
-            {
-                { name = 'buffer' }
+                { name = 'path '},
+                { name = 'buffer' },
             },
             mapping = cmp.mapping.preset.insert({
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -107,5 +98,6 @@ return {
                 -- ['<C-e>'] = cmp.mapping.abort(),
             }),
         })
+        --]]
     end
 }
