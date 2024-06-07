@@ -1,18 +1,19 @@
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-vim.opt.shortmess:append("c")
-
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 
 lspkind.init({})
 
 cmp.setup({
-    preselect = "item",
-    sources = cmp.config.sources({
+    completion = {
+        completeopt = 'menu, menuone',
+    },
+    sources = {
         { name = 'nvim_lsp' },
-    }, {
+        { name = 'path' },
+    },
+    {
         { name = 'buffer' },
-    }),
+    },
     mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
         ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
@@ -35,6 +36,20 @@ cmp.setup({
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
+})
+
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        {
+            name = 'cmdline',
+            option = {
+                ignore_cmds = { 'Man', '!' }
+            }
+        }
+    })
 })
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()

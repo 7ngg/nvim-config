@@ -19,8 +19,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
-                "rust_analyzer",
-                "tsserver",
+                "clangd",
             },
             handlers = {
                 function(server_name)
@@ -63,41 +62,10 @@ return {
             float = {
                 style = 'minimal',
                 border = 'rounded',
-                source = 'always',
+                source = true,
                 header = '',
                 prefix = '',
             },
         })
-        --[[
-        require('luasnip.loaders.from_vscode').lazy_load()
-        vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-        local cmp = require('cmp')
-        cmp.setup({
-            preselect = 'item',
-            completion = {
-                completeopt = 'menu,menuone,noinsert'
-            },
-            snippet = {
-                expand = function(args)
-                    vim.snippet.expand(args.body)
-                end
-            },
-            window = {
-                documentation = cmp.config.window.bordered(),
-            },
-            sources = {
-                { name = 'nvim_lsp' },
-                { name = 'path '},
-                { name = 'buffer' },
-            },
-            mapping = cmp.mapping.preset.insert({
-                ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                ['<C-.>'] = cmp.mapping.complete(),
-                ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-                -- ['<C-e>'] = cmp.mapping.abort(),
-            }),
-        })
-        --]]
     end
 }
