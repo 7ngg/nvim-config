@@ -5,13 +5,11 @@ lspkind.init({})
 
 cmp.setup({
     completion = {
-        completeopt = 'menu, menuone',
+        completeopt = 'menu,menuone,popup',
     },
     sources = {
         { name = 'nvim_lsp' },
         { name = 'path' },
-    },
-    {
         { name = 'buffer' },
     },
     mapping = cmp.mapping.preset.insert({

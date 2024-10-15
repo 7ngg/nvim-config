@@ -11,6 +11,7 @@ return {
                 typescriptreact = { { "prettierd", "prettier" } },
                 javascript = { { "prettierd", "prettier" } },
                 javascriptreact = { { "prettierd", "prettier" } },
+                csharp = { 'csharpier' }
             }
         })
 
@@ -18,7 +19,7 @@ return {
             conform.format({
                 lsp_fallback = true,
                 async = false,
-                timeout_ms = 500,
+                -- timeout_ms = 500,
             })
         end)
     end
