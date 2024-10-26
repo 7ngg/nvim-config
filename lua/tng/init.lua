@@ -1,6 +1,6 @@
 require("tng.remap")
 require("tng.set")
-require("tng.lazy_init")
+require("tng.lazy")
 
 local augroup = vim.api.nvim_create_augroup
 local tngGroup = augroup('tng', {})

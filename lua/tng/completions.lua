@@ -1,11 +1,27 @@
+vim.opt.shortmess:append("c")
+
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 
 lspkind.init({})
 
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        {
+            name = 'cmdline',
+            option = {
+                ignore_cmds = { 'Man', '!' }
+            }
+        }
+    })
+})
+
 cmp.setup({
     completion = {
-        completeopt = 'menu,menuone,popup',
+        completeopt = "menu,menuone,popup"
     },
     sources = {
         { name = 'nvim_lsp' },
@@ -34,20 +50,6 @@ cmp.setup({
         -- completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
-})
-
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        {
-            name = 'cmdline',
-            option = {
-                ignore_cmds = { 'Man', '!' }
-            }
-        }
-    })
 })
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
