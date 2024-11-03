@@ -41,6 +41,14 @@ return {
                         }
                     }
                 end,
+
+                ["omnisharp"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.omnisharp.setup({
+                        capabilities = capabilities,
+                    })
+                    require("luasnip.loaders.from_vscode").lazy_load()
+                end,
             }
         })
 
