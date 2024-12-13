@@ -11,7 +11,12 @@ return {
         "Mofiqul/vscode.nvim",
         name = "vscode",
         config = function()
-            ColorMyPencil()
+            require("vscode").setup({
+                transparent = true,
+                italic_comments = false
+            })
+
+            vim.cmd.colorscheme("vscode")
         end
     },
 }

@@ -42,13 +42,34 @@ return {
                     }
                 end,
 
-                ["csharp_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.csharp_ls.setup({
+                ["omnisharp"] = function()
+                    local ls = require("lspconfig")
+                    ls.omnisharp.setup({
                         capabilities = capabilities,
+                        settings = {
+                            FormattingOptions = {
+                                EnableEditorConfigSupport = true,
+                                OrganizeImports = true,
+                            },
+                            MsBuild = {},
+                            RoslynExtensionsOptions = {
+                                EnableImportCompletion = true,
+                            },
+                            Sdk = {
+                                IncludePrereleases = true,
+                            },
+                        }
                     })
                     require("luasnip.loaders.from_vscode").lazy_load()
-                end,
+                end
+
+                -- ["csharp_ls"] = function()
+                --     local lspconfig = require("lspconfig")
+                --     lspconfig.csharp_ls.setup({
+                --         capabilities = capabilities,
+                --     })
+                --     require("luasnip.loaders.from_vscode").lazy_load()
+                -- end,
             }
         })
 
