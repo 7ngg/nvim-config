@@ -1,22 +1,36 @@
 return {
-    "hrsh7th/nvim-cmp",
-    lazy = false,
-    priority = 100,
-    dependencies = {
-        "onsails/lspkind.nvim",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-cmdline",
-        {
-            "L3MON4D3/LuaSnip",
-            build = "make install_jsregexp",
-            dependencies = { "rafamadriz/friendly-snippets" }
-        },
-        "saadparwaiz1/cmp_luasnip",
+  'saghen/blink.cmp',
+  dependencies = 'rafamadriz/friendly-snippets',
+
+  version = 'v0.*',
+
+  opts = {
+    keymap = {
+      preset = 'default',
+      ['<Tab>'] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.accept()
+          else
+            return cmp.select_and_accept()
+          end
+        end,
+        'snippet_forward',
+        'fallback'
+      },
     },
-    config = function()
-        require("tng.completions")
-        require("tng.snippets")
-    end
+
+    appearance = {
+      use_nvim_cmp_as_default = true,
+      nerd_font_variant = 'mono'
+    },
+
+    signature = { enabled = true },
+
+    completion = {
+      documentation = {
+        auto_show = true
+      }
+    }
+  },
 }

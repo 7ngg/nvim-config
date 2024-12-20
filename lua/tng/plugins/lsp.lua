@@ -1,100 +1,75 @@
 return {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-        { "folke/neodev.nvim", opts = {} },
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-    },
-    config = function()
-        require("neodev").setup({})
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "saghen/blink.cmp",
+    { "folke/neodev.nvim", opts = {} },
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  },
+  config = function()
+    local ensure_installed = {
+      "lua_ls",
+      "clangd",
+    }
 
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            require("cmp_nvim_lsp").default_capabilities())
+    local servers = {
+      dockerls = true,
+      clangd = true,
+      gopls = true,
+      html = true,
+      pyright = true,
+      ts_ls = true,
+      lua_ls = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim", "it", "describe", "before_each", "after_each" },
+          }
+        }
+      },
+      csharp_ls = true,
+    }
 
-        local _border = "rounded"
+    local _border = "rounded"
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local lspconfig = require("lspconfig")
 
-        require("mason").setup()
-        require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "clangd",
-            },
-            handlers = {
-                function(server_name)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
+    require("neodev").setup({})
 
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                end,
+    require("mason").setup()
+    require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
-                ["omnisharp"] = function()
-                    local ls = require("lspconfig")
-                    ls.omnisharp.setup({
-                        capabilities = capabilities,
-                        settings = {
-                            FormattingOptions = {
-                                EnableEditorConfigSupport = true,
-                                OrganizeImports = true,
-                            },
-                            MsBuild = {},
-                            RoslynExtensionsOptions = {
-                                EnableImportCompletion = true,
-                            },
-                            Sdk = {
-                                IncludePrereleases = true,
-                            },
-                        }
-                    })
-                    require("luasnip.loaders.from_vscode").lazy_load()
-                end
+    for name, config in pairs(servers) do
+      if config == true then
+        config = {}
+      end
 
-                -- ["csharp_ls"] = function()
-                --     local lspconfig = require("lspconfig")
-                --     lspconfig.csharp_ls.setup({
-                --         capabilities = capabilities,
-                --     })
-                --     require("luasnip.loaders.from_vscode").lazy_load()
-                -- end,
-            }
-        })
+      config = vim.tbl_deep_extend("force", {}, {
+        capabilities = capabilities
+      }, config)
 
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-            vim.lsp.handlers.hover, {
-                border = _border,
-            }
-        )
-
-        vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-            vim.lsp.handlers.signatureHelp, {
-                border = _border,
-            }
-        )
-
-        vim.diagnostic.config({
-            virtual_text = true,
-            update_in_insert = true,
-            float = {
-                style = 'minimal',
-                border = 'rounded',
-                source = true,
-                header = '',
-                prefix = '',
-            },
-        })
+      lspconfig[name].setup(config)
     end
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        border = _border,
+      }
+    )
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+      vim.lsp.handlers.signatureHelp, {
+        border = _border,
+      }
+    )
+    vim.diagnostic.config({
+      virtual_text = true,
+      update_in_insert = true,
+      float = {
+        style = 'minimal',
+        border = 'rounded',
+        source = true,
+        header = '',
+        prefix = '',
+      },
+    })
+  end
 }
