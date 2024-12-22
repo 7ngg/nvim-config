@@ -26,7 +26,6 @@ return {
           }
         }
       },
-      csharp_ls = true,
     }
 
     local _border = "rounded"
@@ -34,7 +33,6 @@ return {
     local lspconfig = require("lspconfig")
 
     require("neodev").setup({})
-
     require("mason").setup()
     require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
