@@ -16,7 +16,21 @@ return {
         italic_comments = false
       })
 
-      ColorMyPencil()
+      -- ColorMyPencil()
     end
   },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+      require("tokyonight").setup({
+        style = "night",
+        transparent = true
+      })
+
+      ColorMyPencil("tokyonight")
+    end
+  }
 }

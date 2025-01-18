@@ -1,15 +1,18 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "saghen/blink.cmp",
+    -- "saghen/blink.cmp",
     { "folke/neodev.nvim", opts = {} },
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
   config = function()
+    local lspconfig = require("lspconfig")
+
     local ensure_installed = {
       "lua_ls",
       "clangd",
+      "gopls",
     }
 
     local servers = {
@@ -19,6 +22,7 @@ return {
       html = true,
       pyright = true,
       ts_ls = true,
+      tailwindcss = true,
       lua_ls = {
         Lua = {
           diagnostics = {
@@ -29,12 +33,20 @@ return {
     }
 
     local _border = "rounded"
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    local lspconfig = require("lspconfig")
+    local capabilities = require("blink-cmp").get_lsp_capabilities()
 
-    require("neodev").setup({})
-    require("mason").setup()
-    require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+    require("neodev").setup()
+    require('mason').setup({
+      registries = {
+        'github:mason-org/mason-registry',
+        'github:crashdummyy/mason-registry',
+      },
+    })
+
+    ---@diagnostic disable-next-line: missing-fields
+    require("mason-lspconfig").setup({
+      ensure_installed = ensure_installed,
+    })
 
     for name, config in pairs(servers) do
       if config == true then
@@ -63,7 +75,7 @@ return {
       update_in_insert = true,
       float = {
         style = 'minimal',
-        border = 'rounded',
+        border = _border,
         source = true,
         header = '',
         prefix = '',

@@ -11,7 +11,7 @@ return {
                 typescriptreact = { "prettierd", "prettier", stop_after_first = true },
                 javascript = { "prettierd", "prettier", stop_after_first = true },
                 javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-                csharp = { "prettierd" , "csharpier", stop_after_first = true }
+                csharp = { "csharpier", "prettierd" , stop_after_first = true }
             }
         })
 
