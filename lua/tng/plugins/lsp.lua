@@ -1,7 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    -- "saghen/blink.cmp",
     { "folke/neodev.nvim", opts = {} },
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -17,12 +16,24 @@ return {
 
     local servers = {
       dockerls = true,
+      docker_compose_language_service = true,
       clangd = true,
       gopls = true,
       html = true,
       pyright = true,
       ts_ls = true,
       tailwindcss = true,
+      jsonls = true,
+      yamlls = true,
+      cssls = true,
+      ltex = true,
+      omnisharp = {
+        settings = {
+          RoslynExtensionsOptions = {
+            EnableImportCompletion = true
+          }
+        }
+      },
       lua_ls = {
         Lua = {
           diagnostics = {
@@ -70,6 +81,7 @@ return {
         border = _border,
       }
     )
+
     vim.diagnostic.config({
       virtual_text = true,
       update_in_insert = true,

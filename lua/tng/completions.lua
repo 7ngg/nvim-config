@@ -1,5 +1,3 @@
-vim.opt.shortmess:append("c")
-
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 

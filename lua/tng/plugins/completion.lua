@@ -2,7 +2,10 @@ return {
   'saghen/blink.cmp',
   dependencies = 'rafamadriz/friendly-snippets',
 
-  version = 'v0.*',
+  version = '*',
+
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
 
   opts = {
     keymap = {
@@ -38,6 +41,14 @@ return {
 
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
+
+    cmdline = {
+      completion = {
+        menu = {
+          auto_show = true
+        }
+      }
     }
   },
 }
