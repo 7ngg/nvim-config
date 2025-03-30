@@ -4,6 +4,7 @@ return {
     { "folke/neodev.nvim", opts = {} },
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "nanotee/sqls.nvim",
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -27,6 +28,21 @@ return {
       yamlls = true,
       cssls = true,
       ltex = true,
+      sqls = {
+        on_attach = function(client, bufnr)
+          require("sqls").on_attach(client, bufnr)
+        end,
+        settings = {
+          sqls = {
+            connections = {
+              {
+                driver = "postgresql",
+                dataSourceName = "host=172.24.64.1 port=5432 user=postgres password=admin dbname=chirpy sslmode=disable"
+              }
+            }
+          }
+        }
+      },
       omnisharp = {
         settings = {
           RoslynExtensionsOptions = {

@@ -9,28 +9,15 @@ end
 return {
   {
     "Mofiqul/vscode.nvim",
-    name = "vscode",
+    lazy = false,
     config = function()
       require("vscode").setup({
-        transparent = true,
-        italic_comments = false
-      })
-
-      -- ColorMyPencil()
-    end
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function()
-      require("tokyonight").setup({
-        style = "night",
         transparent = true
       })
 
-      ColorMyPencil("tokyonight")
+      vim.cmd.colorscheme("vscode")
     end
-  }
+  },
+  "rose-pine/neovim",
+  "folke/tokyonight.nvim",
 }
