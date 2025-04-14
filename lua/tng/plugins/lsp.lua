@@ -16,18 +16,15 @@ return {
     }
 
     local servers = {
-      dockerls = true,
-      docker_compose_language_service = true,
       clangd = true,
       gopls = true,
       html = true,
-      pyright = true,
       ts_ls = true,
       tailwindcss = true,
       jsonls = true,
       yamlls = true,
       cssls = true,
-      ltex = true,
+      zls = true,
       sqls = {
         on_attach = function(client, bufnr)
           require("sqls").on_attach(client, bufnr)
@@ -37,7 +34,7 @@ return {
             connections = {
               {
                 driver = "postgresql",
-                dataSourceName = "host=172.24.64.1 port=5432 user=postgres password=admin dbname=chirpy sslmode=disable"
+                dataSourceName = "host=127.0.0.1 port=5432 user=postgres password=admin dbname=chirpy sslmode=disable"
               }
             }
           }
