@@ -1,22 +1,29 @@
-vim.opt.encoding = "utf-8"
+local opt = vim.opt
 
---vim.o.guicursor = 'n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+opt.encoding = "utf-8"
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
+opt.swapfile = false
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+opt.inccommand = "split"
 
-vim.opt.smartindent = true
+opt.smartcase = true
+opt.ignorecase = true
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+opt.nu = true
+opt.relativenumber = true
 
-vim.opt.termguicolors = true
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
 
-vim.opt.updatetime = 50
+opt.smartindent = true
 
-vim.opt.colorcolumn = "80"
+opt.hlsearch = false
+opt.incsearch = true
+
+opt.termguicolors = true
+
+opt.updatetime = 50
+
+opt.colorcolumn = "80"
