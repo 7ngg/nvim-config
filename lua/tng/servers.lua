@@ -1,0 +1,15 @@
+return {
+  clangd = {},
+  gopls = {},
+  html = {},
+  htmx = {},
+  ts_ls = {},
+  tailwindcss = {},
+  jsonls = {},
+  yamlls = {},
+  cssls = {},
+  zls = {},
+  sqls = {},
+  rust_analyzer = {},
+  lua_ls = {},
+}
